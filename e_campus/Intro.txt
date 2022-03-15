@@ -1,0 +1,4 @@
+------------------------------------------------------------------------------------------------
+---------------------------------Project Title :- E_campus--------------------------------------
+This is exam management system.
+This is developed in django-python web framework.
