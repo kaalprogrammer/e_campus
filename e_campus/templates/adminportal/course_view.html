@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course-View</title>
+</head>
+<body>
+    <div class="main-panel">
+        <div class="content-wrapper">
+            <div class="row">
+                <div class="col-lg-12 grid-margin stretch-card">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title">
+                                <a style="margin-left: 85%;" class="btn btn-outline-primary float-left" href="{% url 'adminportal_urls:create' %}" type="button">
+                                    Add Course
+                                </a> Course Table
+                            </h4>
+                            <div class="table-responsive">
+                                {% for message in messages %}
+                                <div style="color:rgb(1, 9, 119);" class="alert alert-success alert-dismissible" role="alert">
+                                    {{ message }}
+                                </div>
+                                {% endfor %}
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Course Id</th>
+                                            <th>Course Name</th>
+                                            <th>Course Descriptiion </th>
+                                            <th>Status</th>
+                                            <th>Edit/Delete </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% if items %} {% for course in items %}
+                                        <tr>
+                                            
+                                            <td>{{course.courseId}}</td>
+                                            <td>{{course.courseName}}</td>
+                                            <td>{{course.Description}}</td> 
+                                            <td>{{course.status}}</td>
+                                            <td>
+                                                <a href="{% url 'adminportal_urls:update' course.courseId %}" type="button" class="btn btn-warning" style="padding: 6px;">
+                                                    <span class="mdi mdi-grease-pencil"></span>
+                                                </a>
+                                                <a style="padding: 5px;"> </a>
+                                                <a href="{% url 'adminportal_urls:delete' course.courseId %}" type="button" class="btn btn-danger" style="padding: 6px;">
+                                                    <span class="mdi mdi-delete-empty"></span>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        {% endfor %} {% endif %}
+    
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+</body>
+</html>

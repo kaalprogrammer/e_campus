@@ -1,0 +1,3 @@
+hiii! 
+This is kamal.
+This is static files
