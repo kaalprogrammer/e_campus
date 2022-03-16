@@ -15,5 +15,5 @@ urlpatterns = [
     path('update/<int:pk>',BaseUpdateView.as_view(), name ='course_update'),
     path('delete/<int:pk>',BaseDeleteView.as_view(), name ='course_delete'),
     path('courseview/>',BaseCourseView.as_view(), name ='course_view'),
-
+    # path('courseview/',views.courseview, name='course_view'),
 ]

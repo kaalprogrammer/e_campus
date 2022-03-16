@@ -2,7 +2,7 @@ from audioop import reverse
 from pyexpat import model
 from re import template
 from shutil import unregister_unpack_format
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, FormView
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
@@ -37,7 +37,8 @@ class BaseCreateView(CreateView,ListView):
     model = Course 
     form_class = CourseAddForm
     template_name = 'adminportal/createcourse.html'
-    success_url = 'course_view'
+    # success_url = 'about'
+    redirect = 'courseview/'
 
     def get_success_message(self,cleaned_data):
         self.courseName = cleaned_data['name']
@@ -48,11 +49,12 @@ class BaseCreateView(CreateView,ListView):
 
 class BaseCourseView(ListView):
     model = Course
-    template_name = 'adminportal/course_view.html'
-    # def get(self,request):  
-    #     return render(request,'adminportal/course_view.html')
+    # template_name = 'adminportal/course_view.html'
+    def get(self,request):  
+        return render(request,'adminportal/course_view.html')
 
-
+# def courseview(request):
+#     return render(request,'adminportal/course_view.html')
 
 
 class BaseUpdateView(SuccessMessageMixin,UpdateView):
