@@ -85,3 +85,5 @@ class BaseDeleteView(SuccessMessageMixin,DeleteView):
 
     # def get_success_url(self):
     #     return reverse('user_urls:admin_customized')
+
+    
