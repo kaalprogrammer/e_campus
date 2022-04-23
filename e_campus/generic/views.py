@@ -1,9 +1,7 @@
 from audioop import reverse
-from pyexpat import model
-from re import template
-from shutil import unregister_unpack_format
 from django.shortcuts import redirect, render
-from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, FormView
+from django.views.generic.list import ListView
+from django.views.generic import DetailView, CreateView, UpdateView, DeleteView, FormView, TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from adminportal.forms import CourseAddForm
@@ -38,7 +36,7 @@ class BaseCreateView(CreateView,ListView):
     form_class = CourseAddForm
     template_name = 'adminportal/createcourse.html'
     # success_url = 'about'
-    redirect = 'courseview/'
+    redirect = 'course_view/'
 
     def get_success_message(self,cleaned_data):
         self.courseName = cleaned_data['name']
@@ -49,33 +47,41 @@ class BaseCreateView(CreateView,ListView):
 
 class BaseCourseView(ListView):
     model = Course
-    # template_name = 'adminportal/course_view.html'
-    def get(self,request):  
-        return render(request,'adminportal/course_view.html')
+    template_name = 'adminportal/course_view.html'
+    context_object_name = 'courses'
+    # def get(self,request):  
+    #     return render(request,'adminportal/course_view.html')
 
-# def courseview(request):
-#     return render(request,'adminportal/course_view.html')
+    # def courseview(request):        
+    #     return render(request,'adminportal/course_view.html')
+    # def get_queryset(self):
+    #     return Course.objects.filter(courseName='Python')
 
-
-class BaseUpdateView(SuccessMessageMixin,UpdateView):
-    models = Course
-    form_class = CourseAddForm
+class BaseUpdateView(UpdateView):
+    model = Course
+    form_class = CourseAddForm 
     template_name = 'adminportal/update.html'
-
+    success_url = 'thanks/'  
     def get_success_message(self, cleaned_data):
         self.courseName = cleaned_data["name"]
         return self.courseName + "Updated Successfully...!"
 
-    def get_success_url(self):
-        return reverse('user_urls:admin_customized')
+    # def get_success_url(self):
+    #     return reverse('user_urls:admin_customized')
+class ThanksUpdateView(TemplateView):
+    template_name = 'adminportal/thanks.html'
+
+
+
 
 class BaseDeleteView(SuccessMessageMixin,DeleteView):
     model = Course
     template_name = 'adminportal/coursedel.html'
     context_object_name = 'delete_course'
+    success_url = 'thanks/'
 
     def get_success_message(self, cleaned_data):
         return "Course Deleted Successfully...!"
 
-    def get_success_url(self):
-        return reverse('user_urls:admin_customized')
+    # def get_success_url(self):
+    #     return reverse('user_urls:admin_customized')

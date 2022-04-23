@@ -44,6 +44,8 @@ INSTALLED_APPS = [
     'crispy_forms',
 ]
 
+
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -139,3 +141,6 @@ STATICFILES_DIRS = [
 
 
 STATIC_DIR = os.path.join(BASE_DIR,'static')
+
+#-------------------Manually added bootstrap pack in crispy forms----------
+CRISPY_TEMPLATE_PACK = 'bootstrap4'

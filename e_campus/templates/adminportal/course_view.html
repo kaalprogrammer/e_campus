@@ -1,9 +1,11 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
     <title>Course-View</title>
 </head>
 <body>
@@ -14,9 +16,10 @@
                     <div class="card">
                         <div class="card-body">
                             <h4 class="card-title">
-                                <a style="margin-left: 85%;" class="btn btn-outline-primary float-left" href="{% url 'adminportal_urls:create' %}" type="button">
+                                <h4>Course Table</h4> 
+                                <a style="margin-left: 85%;" class="btn btn-outline-primary float-left" href="{% url 'course_create' %}" type="button">
                                     Add Course
-                                </a> Course Table
+                                </a> 
                             </h4>
                             <div class="table-responsive">
                                 {% for message in messages %}
@@ -35,24 +38,31 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {% if items %} {% for course in items %}
+                                        
+                                        {% for course in courses%}
                                         <tr>
                                             
                                             <td>{{course.courseId}}</td>
                                             <td>{{course.courseName}}</td>
-                                            <td>{{course.Description}}</td> 
-                                            <td>{{course.status}}</td>
+                                            <td>{{course.courseDescription}}</td> 
+                                            <td>{{course.active}}</td>
                                             <td>
-                                                <a href="{% url 'adminportal_urls:update' course.courseId %}" type="button" class="btn btn-warning" style="padding: 6px;">
-                                                    <span class="mdi mdi-grease-pencil"></span>
+                                                <div>
+                                                <a href="{% url 'course_update' course.courseId %}" type="button" class="btn btn-warning" style="padding: 6px;">
+                                                   Edit <span class="mdi mdi-grease-pencil"></span>
                                                 </a>
+                                                </div>
+                                                <div>
                                                 <a style="padding: 5px;"> </a>
-                                                <a href="{% url 'adminportal_urls:delete' course.courseId %}" type="button" class="btn btn-danger" style="padding: 6px;">
-                                                    <span class="mdi mdi-delete-empty"></span>
+                                                
+                                                <a href="{% url 'course_delete' course.courseId %}" type="button" class="btn btn-danger" style="padding: 6px;">
+                                                   Delete <span class="mdi mdi-delete-empty"></span>
                                                 </a>
+                                                </div>
                                             </td>
                                         </tr>
-                                        {% endfor %} {% endif %}
+                                        {% endfor %} 
+                                        
     
                                     </tbody>
                                 </table>
@@ -60,5 +70,8 @@
                         </div>
                     </div>
                 </div>
+                <script src="{% static 'js/jquery.js'%}"></script>
+                <script src="{% static 'js/bootstrap.js'%}"></script>
+                <script src="{% static 'js/popper.js'%}"></script>
 </body>
 </html>
