@@ -48,15 +48,15 @@
                                             <td>{{course.active}}</td>
                                             <td>
                                                 <div>
-                                                <a href="{% url 'course_update' course.courseId %}" type="button" class="btn btn-warning" style="padding: 6px;">
-                                                   Edit <span class="mdi mdi-grease-pencil"></span>
+                                                <a href="{% url 'course_update' course.courseId %}" type="button" class="btn btn-warning d-inline" style="padding: 6px;">
+                                                   Edit 
                                                 </a>
-                                                </div>
-                                                <div>
-                                                <a style="padding: 5px;"> </a>
                                                 
-                                                <a href="{% url 'course_delete' course.courseId %}" type="button" class="btn btn-danger" style="padding: 6px;">
-                                                   Delete <span class="mdi mdi-delete-empty"></span>
+                                                
+                                                
+                                                
+                                                <a href="{% url 'course_delete' course.courseId %}" type="button" class="btn btn-danger d-inline" style="padding: 6px;">
+                                                   Delete 
                                                 </a>
                                                 </div>
                                             </td>

@@ -144,3 +144,5 @@ STATIC_DIR = os.path.join(BASE_DIR,'static')
 
 #-------------------Manually added bootstrap pack in crispy forms----------
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+AUTh_USER_MODEL = 'adminportal.User'

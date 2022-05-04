@@ -1,6 +1,9 @@
 from django.shortcuts import render
 from django.views import View
 from adminportal.models import *
+from django.contrib.auth.models import AbstractUser
+
+
 # Create your views here.
 
 class HomeView(View):
@@ -23,3 +26,8 @@ class Login(View):
     def get(self,request):
         return render(request,'adminportal/login.html')
 
+#--------------How to do a multi user login in Django---------
+class User(AbstractUser):
+    is_admin = models.BooleanField('is_admin',default=False)
+    is_faculty = models.BooleanField('is_faculty',default=False)
+    is_student = models.BooleanField('is_student',default=False)

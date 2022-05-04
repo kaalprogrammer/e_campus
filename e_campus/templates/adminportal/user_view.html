@@ -1,0 +1,68 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <title>UserList</title>
+</head>
+<body>
+    <div class="col-sm-8">
+    <h3 class="text=center alert alert-info">Show User List</h3>
+    {% if user %}
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">User Id</th>
+                <th scope="col">First Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Password</th>
+                <th scope="col">Role Name</th>
+            </tr>
+        </thead>
+        <tbody> 
+            {% for user in users %}
+            <tr>
+                <td scope="row">{{user.userId}}</td>
+                <td>{{user.firstName}}</td>
+                <td>{{user.email}}</td>
+                <td>{{user.password}}</td>
+                <td>{{user.roleId}}</td>
+                <td>
+                    <div>
+                        <a href="#" class="btn btn-warning d-inline">Edit</a>
+                    
+                        
+                            <form action="#" class="d-inline" method="POST" >
+                            {% csrf_token %}
+                            <input type="submit" class="btn btn-danger d-inline"  value="Delete">
+                            </form>                        
+                    </div>
+                    
+                </td>
+            </tr>
+            {% endfor %}
+            
+        </tbody>
+      </table>
+    
+    {% else %}
+    <h4 class="text=center alert alert-info">No Recordes</h4>
+
+    {% endif %}
+</div>
+</div>
+    
+
+
+
+
+
+
+                <script src="{% static 'js/jquery.js'%}"></script>
+                <script src="{% static 'js/bootstrap.js'%}"></script>
+                <script src="{% static 'js/popper.js'%}"></script>
+</body>
+</html>

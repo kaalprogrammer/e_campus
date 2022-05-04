@@ -1,12 +1,12 @@
 from audioop import reverse
 from django.shortcuts import redirect, render
 from django.views.generic.list import ListView
-from django.views.generic import DetailView, CreateView, UpdateView, DeleteView, FormView, TemplateView
+from django.views.generic import DetailView, CreateView, UpdateView, DeleteView, FormView, TemplateView,ListView
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
-from adminportal.forms import CourseAddForm
+from adminportal.forms import CourseAddForm, UserAddForm
 
-from adminportal.models import Course  
+from adminportal.models import Course, User 
 
 # Create your views
 #------------------User Base Class--------------------------
@@ -86,4 +86,39 @@ class BaseDeleteView(SuccessMessageMixin,DeleteView):
     # def get_success_url(self):
     #     return reverse('user_urls:admin_customized')
 
+#---------------------User Create Base Class--------------
+class BaseUserCreateView(CreateView):
+    model = User
+    form_class = UserAddForm
+    template_name = 'adminportal/createuser.html'
+    # success_url = 'thanks/'
+
+#---------------------Show User Base Class----------------
+class BaseUserView(ListView):
+    model = User
+    template_name = 'adminportal/user_view.html'
+    context_object_name = 'users'
+
+    def get_context_data(self, *args,**kwargs):
+         context = super().get_context_data(*args,**kwargs)
+         context['newers']=User.objects.all().order_by('firstName')
+         return context
+
+
+
+#----------------------Multi user Authentication-------------------
+class BaseLoginView(LoginRequiredMixin,ListView):
+    model = User
+    template_name = 'adminportal/login.html'
+    context_object_name = 'users'
     
+    def get_queryset(self):
+        return User.objects.filter(username='admin')
+
+    def get_success_url(self):
+        return reverse('user_urls:admin_customized')
+
+    def get_context_data(self, **kwargs):
+        context = super(BaseLoginView, self).get_context_data(**kwargs)
+        context['users'] = User.objects.all()
+        return context
